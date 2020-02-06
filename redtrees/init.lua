@@ -34,7 +34,7 @@ local function add_trunk_and_leaves(data, a, pos, tree_cid, leaves_cid,
 		[minetest.get_content_id("default:grass_4")] = true,
 		[minetest.get_content_id("default:grass_5")] = true,
 	}
-	
+
 	--TRUNK!!! EXCITEMENT!!!
 	for y_dist = 0, height - 1 do
 		local vi = a:index(x, y + y_dist, z)
@@ -57,13 +57,13 @@ local function add_trunk_and_leaves(data, a, pos, tree_cid, leaves_cid,
 		end
 	end
 	end
-	
+
 	for _,vi in pairs({ --Add a small ring of leaves at the bottom of the canopy, for more realism.
 		a:index(x + 1, y + height - (size + 1), z),
 		a:index(x - 1, y + height - (size + 1), z),
 		a:index(x, y + height - (size + 1), z + 1),
 		a:index(x, y + height - (size + 1), z - 1)
-		
+
 	}) do
 		if data[vi] == c_air or data[vi] == c_ignore or grow_over[data[vi]]then
 			data[vi] = leaves_cid
