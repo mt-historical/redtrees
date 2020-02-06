@@ -10,12 +10,12 @@ ignore = {
 }
 
 globals = {
-	"minetest"
+    "minetest"
 }
 
 read_globals = {
-	string = {fields = {"split", "trim"}},
-	table = {fields = {"copy", "getn"}},
+    string = {fields = {"split", "trim"}},
+    table = {fields = {"copy", "getn"}},
 
     "VoxelArea", "biome_lib",
     "intllib", "default", "doors",
