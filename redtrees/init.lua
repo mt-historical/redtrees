@@ -91,7 +91,7 @@ end
 
 --MAKE TREE!!
 
-redtrees.grow_tree = function(pos)
+function spawn_tree(pos)
 	local x, y, z = pos.x, pos.y, pos.z
 	local height = random(4, 6)
 	local c_tree = minetest.get_content_id("redtrees:rtree")
@@ -112,9 +112,18 @@ redtrees.grow_tree = function(pos)
 	vm:update_map()
 end
 
+redtrees.grow_tree = function(pos)
+	if not can_grow(pos) then
+		-- try a bit later again
+		minetest.get_node_timer(pos):start(math.random(240, 600))
+		return
+	end
+	spawn_tree(pos)
+end
+
 redtrees.generate_tree = function(pos)
 	pos.y = pos.y + 1
-	redtrees.grow_tree(pos)
+	spawn_tree(pos)
 end
 
 --SUDO PLACE TREE!!!
