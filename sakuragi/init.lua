@@ -90,7 +90,7 @@ local function add_trunk_and_leaves(data, a, pos, tree_cid, leaves_cid,
 end
 
 --MAKE TREE!!
-sakuragi.grow_tree = function(pos)
+function spawn_tree(pos)
 	local x, y, z = pos.x, pos.y, pos.z
 	local height = random(4, 6)
 	local c_tree = minetest.get_content_id("sakuragi:stree")
@@ -111,9 +111,18 @@ sakuragi.grow_tree = function(pos)
 	vm:update_map()
 end
 
+sakuragi.grow_tree = function(pos)
+	if not can_grow(pos) then
+		-- try a bit later again
+		minetest.get_node_timer(pos):start(math.random(240, 600))
+		return
+	end
+	spawn_tree(pos)
+end
+
 sakuragi.generate_tree = function(pos)
 	pos.y = pos.y + 1
-	sakuragi.grow_tree(pos)
+	spawn_tree(pos)
 end
 --SUDO PLACE TREE!!!
 biome_lib:register_generate_plant({
