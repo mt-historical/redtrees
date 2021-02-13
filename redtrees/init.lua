@@ -91,7 +91,7 @@ end
 
 --MAKE TREE!!
 
-function spawn_tree(pos)
+local function spawn_tree(pos)
 	local x, y, z = pos.x, pos.y, pos.z
 	local height = random(4, 6)
 	local c_tree = minetest.get_content_id("redtrees:rtree")
